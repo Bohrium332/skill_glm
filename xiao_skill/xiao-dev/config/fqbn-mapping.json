@@ -1,0 +1,251 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "version": "1.0.0",
+  "description": "FQBN mapping configuration for Seeed XIAO series development boards",
+  "boards": {
+    "XIAO_ESP32S3": {
+      "fqbn": "esp32:esp32:XIAO_ESP32S3",
+      "display_name": "XIAO ESP32S3",
+      "core_package": {
+        "name": "esp32",
+        "maintainer": "Espressif Systems",
+        "version": "3.1.1"
+      },
+      "additional_urls": [
+        "https://espressif.github.io/arduino-esp32/package_esp32_index.json"
+      ],
+      "required_libraries": [],
+      "build_flags": [],
+      "notes": "Base model without on-board sensors"
+    },
+    "XIAO_ESP32S3_Sense": {
+      "fqbn": "esp32:esp32:XIAO_ESP32S3",
+      "display_name": "XIAO ESP32S3 Sense",
+      "core_package": {
+        "name": "esp32",
+        "maintainer": "Espressif Systems",
+        "version": "3.1.1"
+      },
+      "additional_urls": [
+        "https://espressif.github.io/arduino-esp32/package_esp32_index.json"
+      ],
+      "required_libraries": [],
+      "build_flags": [],
+      "notes": "With camera and microphone; D11/D12 shared with microphone"
+    },
+    "XIAO_ESP32S3_Plus": {
+      "fqbn": "esp32:esp32:XIAO_ESP32S3",
+      "display_name": "XIAO ESP32S3 Plus",
+      "core_package": {
+        "name": "esp32",
+        "maintainer": "Espressif Systems",
+        "version": "3.1.1"
+      },
+      "additional_urls": [
+        "https://espressif.github.io/arduino-esp32/package_esp32_index.json"
+      ],
+      "required_libraries": [],
+      "build_flags": [],
+      "notes": "Larger flash/PSRAM variant"
+    },
+    "XIAO_ESP32C3": {
+      "fqbn": "esp32:esp32:XIAO_ESP32C3",
+      "display_name": "XIAO ESP32C3",
+      "core_package": {
+        "name": "esp32",
+        "maintainer": "Espressif Systems",
+        "version": "3.1.1"
+      },
+      "additional_urls": [
+        "https://espressif.github.io/arduino-esp32/package_esp32_index.json"
+      ],
+      "required_libraries": [],
+      "build_flags": [],
+      "notes": "RISC-V based, low cost"
+    },
+    "XIAO_ESP32C5": {
+      "fqbn": "esp32:esp32:XIAO_ESP32C5",
+      "display_name": "XIAO ESP32C5",
+      "core_package": {
+        "name": "esp32",
+        "maintainer": "Espressif Systems",
+        "version": "3.1.1"
+      },
+      "additional_urls": [
+        "https://espressif.github.io/arduino-esp32/package_esp32_index.json"
+      ],
+      "required_libraries": [],
+      "build_flags": [],
+      "notes": "WiFi6 + BLE5.0, RISC-V"
+    },
+    "XIAO_ESP32C6": {
+      "fqbn": "esp32:esp32:XIAO_ESP32C6",
+      "display_name": "XIAO ESP32C6",
+      "core_package": {
+        "name": "esp32",
+        "maintainer": "Espressif Systems",
+        "version": "3.1.1"
+      },
+      "additional_urls": [
+        "https://espressif.github.io/arduino-esp32/package_esp32_index.json"
+      ],
+      "required_libraries": [],
+      "build_flags": [],
+      "notes": "WiFi6 + BLE5.0 + Zigbee; GPIO8/9 are strapping pins"
+    },
+    "XIAO_nRF52840": {
+      "fqbn": "Seeeduino:nrf52:xiaonRF52840",
+      "display_name": "XIAO nRF52840",
+      "core_package": {
+        "name": "Seeeduino:nrf52",
+        "maintainer": "Seeed Studio",
+        "version": "1.0.0"
+      },
+      "additional_urls": [
+        "https://seeed-studio.github.io/Seeed_Arduino_Boards/package_seeeduino_boards_index.json"
+      ],
+      "required_libraries": [],
+      "build_flags": [],
+      "notes": "BLE5.4, NFC; LED is common-anode (inverted logic); P0.14 must not be pulled high during charging"
+    },
+    "XIAO_nRF52840_Sense": {
+      "fqbn": "Seeeduino:nrf52:xiaonRF52840",
+      "display_name": "XIAO nRF52840 Sense",
+      "core_package": {
+        "name": "Seeeduino:nrf52",
+        "maintainer": "Seeed Studio",
+        "version": "1.0.0"
+      },
+      "additional_urls": [
+        "https://seeed-studio.github.io/Seeed_Arduino_Boards/package_seeeduino_boards_index.json"
+      ],
+      "required_libraries": [],
+      "build_flags": [],
+      "notes": "With IMU and microphone; same FQBN as non-Sense variant"
+    },
+    "XIAO_nRF54L15": {
+      "fqbn": "Seeeduino:nrf54:xiaonRF54L15",
+      "display_name": "XIAO nRF54L15 Sense",
+      "core_package": {
+        "name": "Seeeduino:nrf54",
+        "maintainer": "Seeed Studio",
+        "version": "1.0.0"
+      },
+      "additional_urls": [
+        "https://seeed-studio.github.io/Seeed_Arduino_Boards/package_seeeduino_boards_index.json"
+      ],
+      "required_libraries": [],
+      "build_flags": [],
+      "notes": "Ultra-low power, BLE, with IMU"
+    },
+    "XIAO_RP2040": {
+      "fqbn": "rp2040:rp2040:seeed_xiao_rp2040",
+      "display_name": "XIAO RP2040",
+      "core_package": {
+        "name": "rp2040:rp2040",
+        "maintainer": "Earle F. Philhower, III",
+        "version": "4.0.1"
+      },
+      "additional_urls": [
+        "https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json"
+      ],
+      "required_libraries": [],
+      "build_flags": [],
+      "notes": "Dual-core Cortex-M0+, 133MHz; LED is active-low; do not connect Type-C when battery powered"
+    },
+    "XIAO_RP2350": {
+      "fqbn": "rp2040:rp2040:seeed_xiao_rp2350",
+      "display_name": "XIAO RP2350",
+      "core_package": {
+        "name": "rp2040:rp2040",
+        "maintainer": "Earle F. Philhower, III",
+        "version": "4.0.1"
+      },
+      "additional_urls": [
+        "https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json"
+      ],
+      "required_libraries": [],
+      "build_flags": [],
+      "notes": "Dual-core Cortex-M33, upgraded RP2040"
+    },
+    "XIAO_MG24": {
+      "fqbn": "SiliconLabs:efr32mg24:xiao_mg24",
+      "display_name": "XIAO MG24",
+      "core_package": {
+        "name": "SiliconLabs:efr32mg24",
+        "maintainer": "Silicon Labs",
+        "version": "2.0.0"
+      },
+      "additional_urls": [
+        "https://siliconlabs.github.io/arduino/package_arduinosilabs_index.json"
+      ],
+      "required_libraries": [],
+      "build_flags": [],
+      "notes": "Silicon Labs EFR32, Zigbee/Matter support"
+    },
+    "XIAO_RA4M1": {
+      "fqbn": "Seeeduino:renesas:xiao_ra4m1",
+      "display_name": "XIAO RA4M1",
+      "core_package": {
+        "name": "Seeeduino:renesas",
+        "maintainer": "Seeed Studio",
+        "version": "1.0.0"
+      },
+      "additional_urls": [
+        "https://seeed-studio.github.io/Seeed_Arduino_Boards/package_seeeduino_boards_index.json"
+      ],
+      "required_libraries": [],
+      "build_flags": [],
+      "notes": "Renesas ARM Cortex-M4"
+    },
+    "XIAO_SAMD21": {
+      "fqbn": "Seeeduino:samd:seeed_XIAO",
+      "display_name": "XIAO SAMD21",
+      "core_package": {
+        "name": "Seeeduino:samd",
+        "maintainer": "Seeed Studio",
+        "version": "1.8.2"
+      },
+      "additional_urls": [
+        "https://seeed-studio.github.io/Seeed_Arduino_Boards/package_seeeduino_boards_index.json"
+      ],
+      "required_libraries": [],
+      "build_flags": [],
+      "notes": "Original XIAO, ARM Cortex-M0+"
+    }
+  },
+  "board_type_aliases": {
+    "esp32s3": "XIAO_ESP32S3",
+    "esp32s3_sense": "XIAO_ESP32S3_Sense",
+    "esp32s3-sense": "XIAO_ESP32S3_Sense",
+    "esp32s3_plus": "XIAO_ESP32S3_Plus",
+    "esp32s3-plus": "XIAO_ESP32S3_Plus",
+    "esp32c3": "XIAO_ESP32C3",
+    "esp32c5": "XIAO_ESP32C5",
+    "esp32c6": "XIAO_ESP32C6",
+    "nrf52840": "XIAO_nRF52840",
+    "nrf52840_sense": "XIAO_nRF52840_Sense",
+    "nrf52840-sense": "XIAO_nRF52840_Sense",
+    "nrf54l15": "XIAO_nRF54L15",
+    "rp2040": "XIAO_RP2040",
+    "rp2350": "XIAO_RP2350",
+    "mg24": "XIAO_MG24",
+    "ra4m1": "XIAO_RA4M1",
+    "samd21": "XIAO_SAMD21"
+  },
+  "board_groups": {
+    "esp32": ["XIAO_ESP32S3", "XIAO_ESP32S3_Sense", "XIAO_ESP32S3_Plus", "XIAO_ESP32C3", "XIAO_ESP32C5", "XIAO_ESP32C6"],
+    "nrf52": ["XIAO_nRF52840", "XIAO_nRF52840_Sense"],
+    "nrf54": ["XIAO_nRF54L15"],
+    "rp2040": ["XIAO_RP2040", "XIAO_RP2350"],
+    "silabs": ["XIAO_MG24"],
+    "renesas": ["XIAO_RA4M1"],
+    "samd": ["XIAO_SAMD21"]
+  },
+  "core_package_urls": {
+    "esp32": "https://espressif.github.io/arduino-esp32/package_esp32_index.json",
+    "seeeduino": "https://files.seeedstudio.com/arduino/package_seeeduino_boards_index.json",
+    "rp2040": "https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json",
+    "silabs": "https://siliconlabs.github.io/arduino/package_arduinosilabs_index.json"
+  }
+}

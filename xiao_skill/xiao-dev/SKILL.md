@@ -53,6 +53,22 @@ description: |
 4. **复用冲突**：是否与板载外设（LED/传感器/SD卡）冲突？
 5. **Sense 变体**：用户是否混淆了普通版与 Sense 版的功能差异？
 
+### Step 2.5: 内置模块确认（Sense 变体专用）
+
+**在使用内置传感器/模块前，必须确认用户是否为 Sense 版本！**
+
+以下板型存在普通版和 Sense 版差异：
+
+| 板型 | 普通版 | Sense 版 |
+|------|--------|----------|
+| XIAO nRF52840 | 无内置传感器 | 6轴IMU(LSM6DS3TR-C) + PDM麦克风 |
+| XIAO ESP32S3 | 无摄像头/麦克风 | 摄像头 + 麦克风 |
+
+**确认流程**：
+1. 若用户请求使用 IMU、麦克风、摄像头等内置传感器
+2. **必须先询问**："你需要的是 Sense 版本吗？普通版没有内置 [传感器名]"
+3. 确认后再读取对应档案并生成代码
+
 ### Step 3: 代码生成
 
 输出格式：
@@ -73,6 +89,122 @@ description: |
 
 🔌 硬件部署提示
 [接线提醒、外围电路、版本依赖]
+```
+
+### Step 4: Arduino CLI 编译验证
+
+在代码生成后，执行编译验证以确保代码语法正确。
+
+#### 4.1 检测 Arduino CLI
+
+```bash
+# 检查是否已安装
+arduino-cli version
+```
+
+若未安装，提示用户运行安装脚本：
+
+| 平台 | 安装命令 |
+|------|----------|
+| Linux/macOS | `bash scripts/install-arduino-cli.sh [board_type]` |
+| Windows | `.\scripts\install-arduino-cli.ps1 -BoardType [board_type]` |
+
+支持的 `board_type`：`esp32`, `nrf52`, `nrf54`, `rp2040`, `mg24`, `samd`, `ra4m1`, `all`
+
+#### 4.2 FQBN 映射
+
+根据板型从 `config/fqbn-mapping.json` 获取 FQBN：
+
+| 板型 | FQBN |
+|------|------|
+| XIAO ESP32S3/Sense/Plus | `esp32:esp32:XIAO_ESP32S3` |
+| XIAO ESP32C3 | `esp32:esp32:XIAO_ESP32C3` |
+| XIAO ESP32C5 | `esp32:esp32:XIAO_ESP32C5` |
+| XIAO ESP32C6 | `esp32:esp32:XIAO_ESP32C6` |
+| XIAO nRF52840/Sense | `Seeeduino:nrf52:xiaonRF52840` |
+| XIAO nRF54L15 | `Seeeduino:nrf54:xiaonRF54L15` |
+| XIAO RP2040 | `rp2040:rp2040:seeed_xiao_rp2040` |
+| XIAO RP2350 | `rp2040:rp2040:seeed_xiao_rp2350` |
+| XIAO MG24 | `SiliconLabs:efr32mg24:xiao_mg24` |
+| XIAO RA4M1 | `Seeeduino:renesas:xiao_ra4m1` |
+| XIAO SAMD21 | `Seeeduino:samd:seeed_XIAO` |
+
+#### 4.3 编译命令模板
+
+```bash
+# 创建临时 sketch 目录
+mkdir -p /tmp/xiao_sketch_$$
+cat > /tmp/xiao_sketch_$$/sketch.ino << 'EOF'
+[生成的代码]
+EOF
+
+# 执行编译
+arduino-cli compile \
+  --fqbn <FQBN> \
+  --warnings all \
+  /tmp/xiao_sketch_$$
+
+# 清理
+rm -rf /tmp/xiao_sketch_$$
+```
+
+#### 4.4 编译结果处理
+
+**编译成功**：
+```
+✅ 编译验证通过
+   - 使用 FQBN: esp32:esp32:XIAO_ESP32S3
+   - 程序大小: XXX bytes
+   - 存储使用: XX%
+```
+
+**编译失败**：解析错误并提供建议
+
+| 错误类型 | 特征模式 | 处理策略 |
+|---------|----------|----------|
+| 语法错误 | `expected ';' before`, `undeclared` | 指出行号，提供修复 |
+| 库缺失 | `xxx.h: No such file or directory` | 提供 `arduino-cli lib install` 命令 |
+| API 不兼容 | `class X has no member named Y` | 查阅档案提供替代方案 |
+| 引脚错误 | `invalid pin`, `not a valid pin` | 参考档案替换引脚 |
+| FQBN 未知 | `Unknown FQBN` | 提供板包安装命令 |
+
+#### 4.5 错误处理流程
+
+```
+编译失败 → 解析错误类型 → 自动修复（最多3次）
+                           ↓
+                    修复失败 → 输出完整错误 → 询问用户：
+                              1. 手动修复代码
+                              2. 提供更多信息
+                              3. 跳过验证继续
+```
+
+## AI 行为指引
+
+### 代码生成规范
+
+1. **必须先读取档案**：在生成任何代码前，读取 `references/*_Extracted_Data.md`
+2. **声明硬件兼容性**：代码头部注明开发板型号、安全引脚、已规避陷阱
+3. **使用 `config/fqbn-mapping.json`**：获取准确的 FQBN 和板包信息
+
+### 编译验证流程
+
+1. 代码生成后，**主动执行** `arduino-cli compile` 验证
+2. 若 Arduino CLI 未安装，**询问用户**是否安装或跳过
+3. 解析编译输出：
+   - 成功：报告通过
+   - 失败：尝试自动修复（最多3次），之后让用户决定
+
+### 常见编译问题修复
+
+```cpp
+// 问题：ESP32 BLE 库版本不兼容
+// 解决：使用条件编译适配不同版本
+#if ESP_ARDUINO_VERSION_MAJOR >= 3
+  BLEDevice::createServer();  // v3.x API
+#else
+  BLEServer* pServer = BLEDevice::createServer();  // v2.x API
+#endif
 ```
 
 ## 引用知识库
