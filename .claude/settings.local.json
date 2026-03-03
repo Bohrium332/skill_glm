@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(skill-creator)",
+      "Bash(python:*)",
+      "Bash(chmod +x:*)",
+      "Bash(python3:*)",
+      "Bash(tree:*)",
+      "Bash(ls:*)",
+      "Bash(unzip:*)"
+    ]
+  }
+}
